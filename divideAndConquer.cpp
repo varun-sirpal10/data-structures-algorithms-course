@@ -306,6 +306,96 @@ void mergeSort(int arr[], int start, int end){
 	merge(arr,start,end);	
 }
 
+int mergeInversion(int arr[], int start, int end){
+
+	int count = 0;
+	int temp[end-start+1];
+	int mid = start + (end-start)/2;
+
+	int i=start, j=mid+1, k=0;
+	while(i<=mid and j<=end){
+		if(arr[i]>arr[j]){
+			temp[k] = arr[j];
+			k++;
+			j++;
+			count += (mid-i+1);
+		}
+		else{
+			temp[k] = arr[i];
+			k++;
+			i++;
+		}
+	}
+	while(i<=mid){
+		temp[k] = arr[i];
+		k++;
+		i++;
+	}
+
+	while(j<=end){
+		temp[k] = arr[j];
+		k++;
+		j++;
+	}
+
+	for(int x=start;x<=end;x++){
+		arr[x] = temp[x-start];
+	}
+
+	return count;
+}
+
+int inversionCount(int arr[], int start, int end){
+	if(start>=end){
+		return 0;
+	}
+
+	int count = 0;
+	int mid = start + (end-start)/2;
+
+	int leftCount = inversionCount(arr,start,mid);
+	int rightCount = inversionCount(arr,mid+1,end);
+
+	int concat = mergeInversion(arr,start,end);
+	int total = concat + rightCount + leftCount;
+
+	return total;
+}
+
+void quickSort(int arr[], int start, int end){
+
+	if(start >= end){
+		return;
+	}
+	
+	int left = start;
+	int right = end;
+	int mid = start + (end-start)/2;
+
+	int pivot = arr[mid];
+	
+	while(left<=right){
+
+		while(arr[left] < pivot){
+			left++;
+		}
+
+		while(arr[right] > pivot){
+			right--;
+		}
+
+		if(left<=right){
+			swap(arr[left],arr[right]);
+			left++;
+			right--;
+		}
+	}
+
+	quickSort(arr,start,right);
+	quickSort(arr,left,end);
+}
+
+
 int main(){
 
 	// int arr[] = {1,3,7,8,10,12,17};
@@ -336,14 +426,27 @@ int main(){
 	// int arr[] = {1,2,8,4,9};
 	// cout<<aggressiveCows(arr,5,3)<<endl;
 
-	int arr[] = {6,7,2,4,9,3,1,5};
-	int n = 8;
-	mergeSort(arr,0,n-1);
+	// int arr[] = {6,7,2,4,9,3,1,5};
+	// int n = 8;
+	// mergeSort(arr,0,n-1);
+
+	// for(int i=0;i<n;i++){
+	// 	cout<<arr[i]<<" ";
+	// }
+	// cout<<endl;
+
+	// int arr[] = {9,1,4,3,2,5};
+	// int n = 6;
+
+	// cout<<inversionCount(arr,0,n-1);
+
+	int arr[] = {1,6,5,4,2,3,8};
+	int n = 7;
+	quickSort(arr,0,n-1);
 
 	for(int i=0;i<n;i++){
 		cout<<arr[i]<<" ";
 	}
-	cout<<endl;
 
 	return 0;
 }
