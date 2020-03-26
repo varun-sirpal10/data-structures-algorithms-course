@@ -367,7 +367,7 @@ void quickSort(int arr[], int start, int end){
 	if(start >= end){
 		return;
 	}
-	
+
 	int left = start;
 	int right = end;
 	int mid = start + (end-start)/2;
@@ -395,6 +395,39 @@ void quickSort(int arr[], int start, int end){
 	quickSort(arr,left,end);
 }
 
+int uniqueElementInArray(int arr[], int start, int end){
+
+	while(start <= end){
+
+		if(start==end){
+			return arr[start];
+		}
+
+		int mid = start + (end-start)/2;
+
+		if(arr[mid]!=arr[mid-1] and arr[mid]!=arr[mid+1]){
+			return arr[mid];
+		}
+
+		if(mid%2==0){
+			if(arr[mid] == arr[mid-1]){
+				end = mid - 2;
+			}
+			else{
+				start = mid + 2;
+			}
+		}
+
+		else{
+			if(arr[mid] == arr[mid-1]){
+				start = mid + 1;
+			}
+			else{
+				end = mid - 1;
+			}
+		}
+	}
+}
 
 int main(){
 
@@ -440,13 +473,15 @@ int main(){
 
 	// cout<<inversionCount(arr,0,n-1);
 
-	int arr[] = {1,6,5,4,2,3,8};
-	int n = 7;
-	quickSort(arr,0,n-1);
+	// int arr[] = {1,6,5,4,2,3,8};
+	// int n = 7;
+	// quickSort(arr,0,n-1);
 
-	for(int i=0;i<n;i++){
-		cout<<arr[i]<<" ";
-	}
+	// for(int i=0;i<n;i++){
+	// 	cout<<arr[i]<<" ";
+	// }
 
+	int arr[] = {1,1,2,3,3,4,4,7,7};
+	cout<<uniqueElementInArray(arr,0,8)<<endl;
 	return 0;
 }
