@@ -127,38 +127,156 @@ void insertAtMiddle(node* head, int data, int pos){
 	n->next = temp1;
 }
 
+void deleteAtIndex(node* &head, int idx){
+	if(head==NULL){
+		return;
+	}
+	if(head->next == NULL){
+		deleteAtHead(head);
+		return;
+	}
+	node* temp = head;
+	int jump = idx - 2;
+	while(jump>0){
+		temp = temp->next;
+		jump--;
+	}
+	node* toBeDeleted = temp->next;
+	temp->next = toBeDeleted->next;
+	delete toBeDeleted;
+}
+
+node* midPointOfLinkedList(node* head){
+	node* slow = head;
+	node* fast = head;
+
+	while(fast->next!=NULL and fast->next->next!=NULL){
+		slow = slow->next;
+		fast = fast->next->next;
+	}
+
+	return slow;
+}
+
+void reverseIterative(node* &head){
+	node* prev = NULL;
+	node* curr = head;
+
+	while(curr!=NULL){
+		node* n = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = n;
+	}
+
+	head = prev;
+}
+
+node* reverseRecursive(node* &head){
+
+	if(head==NULL or head->next==NULL){
+		return head;
+	}
+
+	node* newHead = reverseRecursive(head->next);
+
+	node* curr = head;
+	curr->next->next = curr;
+	curr->next = NULL;
+	return newHead;
+}
+
+node* merge2LinkedList(node* a, node* b){
+	if(a==NULL){
+		return b;
+	}
+	if(b==NULL){
+		return a;
+	}
+
+	node* result = NULL;
+	if(a->data <= b->data){
+		result = a;
+		result->next = merge2LinkedList(a->next,b);
+	}
+	else{
+		result = b;
+		result->next = merge2LinkedList(a,b->next);
+	}
+	return result;
+}
+
 int main(){
 
-	node*head = NULL;
+	//node*head = NULL;
 
 	//display(head);
 
-	insertAtHead(head,3);
-	insertAtHead(head,2);
-	insertAtHead(head,1);
+	// insertAtHead(head,3);
+	// insertAtHead(head,2);
+	// insertAtHead(head,1);
 
+	// //display(head);
+
+	// insertAtTail(head,4);
+	// insertAtTail(head,7);
+
+	// //display(head);
+
+	// //deleteAtHead(head);
+
+	// //display(head);
+
+	// //deleteAtTail(head);
+
+	// //display(head);
+
+	// //cout<<lengthOfLinkedList(head)<<endl;
+
+	// //searchLinkedList(head,5);
+
+	// insertAtMiddle(head,9,3);
+	// insertAtMiddle(head,6,3);
+
+	// display(head);
+
+	//deleteAtIndex(head,3);
 	//display(head);
 
-	insertAtTail(head,4);
-	insertAtTail(head,7);
+	// node* midPoint = midPointOfLinkedList(head);
+	// cout<<midPoint->data<<endl;
 
-	//display(head);
+	// reverseIterative(head);
+	// display(head);
 
-	//deleteAtHead(head);
+	// head = reverseRecursive(head);
+	// display(head);
 
-	//display(head);
+	node* head1 = NULL;
 
-	//deleteAtTail(head);
+	insertAtTail(head1, 1);
+	insertAtTail(head1, 3);
+	insertAtTail(head1, 5);
+	insertAtTail(head1, 8);
+	insertAtTail(head1, 9);
 
-	//display(head);
+	node* head2 = NULL;
 
-	//cout<<lengthOfLinkedList(head)<<endl;
+	insertAtTail(head2, 2);
+	insertAtTail(head2, 4);
+	insertAtTail(head2, 6);
+	insertAtTail(head2, 7);
 
-	//searchLinkedList(head,5);
+	cout << "First Linked List ******************" << endl;
+	display(head1);
 
-	insertAtMiddle(head,9,3);
+	cout << "Second Linked List ******************" << endl;
+	display(head2);
 
-	display(head);
+	node* mergedList = merge2LinkedList(head1, head2);
+
+	cout << "Merged Linked List ******************" << endl;
+	display(mergedList);
 
 	return 0;
 }
