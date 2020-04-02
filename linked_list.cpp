@@ -206,6 +206,111 @@ node* merge2LinkedList(node* a, node* b){
 	return result;
 }
 
+node* kthNodeFromEnd(node* head, int K){
+	node* slow = head;
+	node* fast = head;
+
+	int count = 1;
+	while(count<=K){
+		fast = fast->next;
+		count++;
+	}
+
+	while(fast!=NULL){
+		slow = slow->next;
+		fast = fast->next;
+	}
+	return slow;
+}
+
+node* mergeSort(node* head){
+	if(head->next == NULL or head==NULL){
+		return head;
+	}
+
+	node* mid = midPointOfLinkedList(head);
+
+	node* merge1 = mergeSort(mid->next);
+
+	mid->next = NULL;
+
+	node* merge2 = mergeSort(head);
+
+	node* sorted = merge2LinkedList(merge1,merge2);
+	return sorted;
+}
+
+node* kReverse(node* head, int K){
+	if(head==NULL or head->next==NULL){
+		return head;
+	}
+
+	int count=1;
+	node* prev = NULL;
+	node* curr = head;
+	node* n = NULL;
+
+	while(curr != NULL and count<=K){
+		n = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = n;
+		count++;
+	}
+
+	head -> next = kReverse(n,K);
+
+	return prev;
+}
+
+void printInReverse(node* head){
+	if(head==NULL){
+		return;
+	}
+
+	printInReverse(head->next);
+	cout<<head->data<<" -> ";
+}
+
+bool helper(node* right){
+	if(right==NULL){
+		return true;
+	}
+
+	bool recursionResult = helper(right->next);
+
+	bool ans = true;
+
+	if(recursionResult == false or left->data != right->data){
+		ans = false;
+	}
+
+	left = left->next;
+	return ans;
+}
+
+node* left;
+bool isPalindrome(node* head){
+
+	left = head;
+	return helper(head);
+}
+
+bool hasCycle(node* head){
+	node* slow = head;
+	node* fast = head;
+
+	while(fast!=NULL and fast->next!=NULL){
+		slow = slow->next;
+		fast = fast->next->next;
+
+		if(slow==fast){
+			return true;
+		}
+	}
+	return false;
+}
+
 int main(){
 
 	//node*head = NULL;
@@ -252,31 +357,51 @@ int main(){
 	// head = reverseRecursive(head);
 	// display(head);
 
-	node* head1 = NULL;
+	node* head = NULL;
 
-	insertAtTail(head1, 1);
-	insertAtTail(head1, 3);
-	insertAtTail(head1, 5);
-	insertAtTail(head1, 8);
-	insertAtTail(head1, 9);
+	insertAtTail(head, 1);
+	insertAtTail(head, 2);
+	insertAtTail(head, 3);
+	insertAtTail(head, 3);
+	insertAtTail(head, 2);
+	insertAtTail(head, 1);
 
-	node* head2 = NULL;
+	display(head);
 
-	insertAtTail(head2, 2);
-	insertAtTail(head2, 4);
-	insertAtTail(head2, 6);
-	insertAtTail(head2, 7);
 
-	cout << "First Linked List ******************" << endl;
-	display(head1);
+	// int K = 2;
 
-	cout << "Second Linked List ******************" << endl;
-	display(head2);
+	// node* kthNode = kthNodeFromEnd(head,K);
+	// cout<<kthNode->data<<endl;
 
-	node* mergedList = merge2LinkedList(head1, head2);
+	// node* merge = mergeSort(head);
+	// display(merge);
 
-	cout << "Merged Linked List ******************" << endl;
-	display(mergedList);
+	// node* klist = kReverse(head,3);
+	// display(klist);
+
+	// printInReverse(head);
+
+	// bool res = isPalindrome(head);
+	// cout<<res<<endl;
+
+	// node* head2 = NULL;
+
+	// insertAtTail(head2, 2);
+	// insertAtTail(head2, 4);
+	// insertAtTail(head2, 6);
+	// insertAtTail(head2, 7);
+
+	// cout << "First Linked List ******************" << endl;
+	// display(head1);
+
+	// cout << "Second Linked List ******************" << endl;
+	// display(head2);
+
+	// node* mergedList = merge2LinkedList(head1, head2);
+
+	// cout << "Merged Linked List ******************" << endl;
+	// display(mergedList);
 
 	return 0;
 }
