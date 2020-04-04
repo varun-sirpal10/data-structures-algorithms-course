@@ -11,7 +11,7 @@
 #include <stack>
 #include <iomanip>
 #include <set>
-#include <map>
+#include <std::map<key, value> map;>
 
 using namespace std;
 
