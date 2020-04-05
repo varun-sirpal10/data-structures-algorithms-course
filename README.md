@@ -7,3 +7,4 @@ Topics covered till now:
 - Backtracking
 - Divide and Conquer
 - Linked Lists
+- Stacks
