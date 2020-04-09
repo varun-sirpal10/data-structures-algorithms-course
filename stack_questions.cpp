@@ -210,6 +210,32 @@ int histogramArea(int arr[], int n){
 	return maxArea;
 }
 
+void insertAtBottom(stack<int>&s, int num){
+
+	if (s.empty())
+	{
+		s.push(num);
+		return;
+	}
+
+	int x = s.top();
+	s.pop();
+	insertAtBottom(s,num);
+	s.push(x);
+}
+
+void reverseStackRecursion(stack<int>&s){
+
+	if(s.empty()){
+		return;
+	}
+
+	int temp = s.top();
+	s.pop();
+	reverseStackRecursion(s);
+	insertAtBottom(s,temp);
+}
+
 int main(){
 
 	// string str = ")))(((";
@@ -230,10 +256,24 @@ int main(){
 	// int n = 6;
 	// nextSmaller(arr,n);
 
-	int arr[] = {6, 2, 5, 4, 5, 1, 6};
-	int n = 7;
+	// int arr[] = {6, 2, 5, 4, 5, 1, 6};
+	// int n = 7;
 
-	cout << histogramArea(arr, n) << endl;
+	// cout << histogramArea(arr, n) << endl;
+
+	stack<int> s;
+	s.push(1);
+	s.push(2);
+	s.push(3);
+	s.push(4);
+
+	reverseStackRecursion(s);
+
+	while(!s.empty()){
+		cout<<s.top()<<" ";
+		s.pop();
+	}
+	cout<<endl;
 
 	return 0;
 }
