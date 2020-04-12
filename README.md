@@ -8,5 +8,6 @@ Topics covered till now:
 - Divide and Conquer
 - Linked Lists
 - Stacks
+- Queues
 
 More content added regularly.
