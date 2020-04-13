@@ -136,6 +136,10 @@ int replaceNodesWithSumOfChildren(TreeNode* root){
 		return 0;
 	}
 
+	if(root->left == NULL and root->right == NULL){
+		return root->val;
+	}
+
 	int leftSum = replaceNodesWithSumOfChildren(root->left);
 	int rightSum = replaceNodesWithSumOfChildren(root->right);
 
