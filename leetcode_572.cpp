@@ -10,25 +10,41 @@
 class Solution {
 public:
     bool isSubtree(TreeNode* s, TreeNode* t) {
-        
         if(s==NULL and t==NULL){
             return true;
         }
-            
-        if(s == NULL or t==NULL){
+        
+        if(s==NULL or t==NULL){
             return false;
         }
         
-        if(s->val == t->val){
-            bool leftRes = isSubtree(s->left,t->left);
-            bool rightRes = isSubtree(s->right,t->right);
-
-            return leftRes and rightRes;
+        if(isSameTree(s,t)){
+            return true;
         }
         
-        bool left = isSubtree(s->left,t);
-        bool right = isSubtree(s->right,t);
-
-        return left or right;
+        bool leftRes = isSubtree(s->left,t);
+        bool rightRes = isSubtree(s->right,t);
+        
+        return leftRes or rightRes;
+    }
+    
+    bool isSameTree(TreeNode* p, TreeNode* q) {
+        
+        if(p==NULL and q==NULL){
+            return true;
+        }
+        
+        if(p==NULL or q==NULL or p->val != q->val){
+            return false;
+        }
+        
+        bool leftRes = isSameTree(p->left,q->left);
+        bool rightRes = isSameTree(p->right,q->right);
+        
+        if(leftRes and rightRes){
+            return true;
+        }
+        
+        return false;
     }
 };

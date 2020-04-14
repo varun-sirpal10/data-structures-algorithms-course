@@ -20,12 +20,12 @@ public:
     int height(TreeNode* root, int &d) {
 
         if(root == NULL){
-            return 0;
+            return -1;
         }
         int leftHeight = height(root->left,d);
         int rightHeight = height(root->right,d);
         
-        d = max(d,leftHeight + rightHeight);
+        d = max(d,leftHeight + rightHeight + 2);
 
         return max(leftHeight,rightHeight) + 1;
     }	

@@ -17,7 +17,7 @@ public:
         int h1 = height(root->left);
         int h2 = height(root->right);
         
-        int op1 = h1 + h2;
+        int op1 = h1 + h2 + 2;
         int op2 = diameterOfBinaryTree(root->left);
         int op3 = diameterOfBinaryTree(root->right);
         
@@ -27,7 +27,7 @@ public:
     int height(TreeNode* root) {
 
         if(root == NULL){
-            return 0;
+            return -1;
         }
 
         int leftHeight = height(root->left);
