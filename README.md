@@ -9,5 +9,7 @@ Topics covered till now:
 - Linked Lists
 - Stacks
 - Queues
+- Deque
+- Binary Trees
 
 More content added regularly.
