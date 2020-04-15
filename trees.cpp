@@ -150,6 +150,35 @@ int replaceNodesWithSumOfChildren(TreeNode* root){
 	return total + prevRoot;
 }
 
+void levelOrderFirst(TreeNode* root){
+
+	queue<TreeNode*> q;
+
+	q.push(root);
+
+	while(!q.empty()){
+
+		TreeNode* temp = q.front();
+		q.pop();
+
+		cout<<temp->val<<" ";
+
+		if(temp->left != NULL){
+			q.push(temp->left);
+		}
+
+		if(temp->right != NULL){
+			q.push(temp->right);
+		}
+	}
+
+	cout<<endl;
+}
+
+void levelOrderSecond(TreeNode* root){
+	
+}
+
 int main() {
 
 	TreeNode* root = NULL;
@@ -173,9 +202,11 @@ int main() {
 
 	// cout<<height(root)<<endl;
 
-	int result = replaceNodesWithSumOfChildren(root);
-	cout<<result<<endl;
-	preOrder(root);
+	// int result = replaceNodesWithSumOfChildren(root);
+	// cout<<result<<endl;
+	// preOrder(root);
+
+	levelOrderFirst(root);
 
 	return 0;
 }

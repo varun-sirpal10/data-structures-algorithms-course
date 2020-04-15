@@ -51,16 +51,4 @@ public:
         
         return val;
     }
-    
-    int height(TreeNode* root) {
-        if (root == NULL) {
-            return -1;
-        }
-
-        int leftHeight = height(root->left);
-        int rightHeight = height(root->right);
-
-        int totalHeight = max(leftHeight, rightHeight) + 1;
-        return totalHeight;
-    }
 };
