@@ -206,6 +206,47 @@ void levelOrderSecond(TreeNode* root){
 	}
 }
 
+void levelOrderNewLine(TreeNode* root){
+	queue<pair<TreeNode*, int>> q;
+
+	pair<TreeNode*,int> p(root,1);
+
+	q.push(p);
+
+	int currLevel = 1;
+
+	while(!q.empty()){
+
+		pair<TreeNode*, int> temp = q.front();
+		q.pop();
+
+		TreeNode* node = temp.first;
+		int level = temp.second;
+
+		if (currLevel==level)
+		{
+			cout<<node->val<<" ";
+		}else
+		{
+			cout<<endl;
+			currLevel = level;
+			cout<<node->val<<" ";
+		}
+
+		if(node->left != NULL){
+			pair<TreeNode*, int> p(node->left, level+1);
+
+			q.push(p);
+		}
+
+		if(node->right != NULL){
+			pair<TreeNode*,int> p(node->right,level+1);
+
+			q.push(p);
+		}
+	}
+}
+
 int main() {
 
 	TreeNode* root = NULL;
@@ -235,7 +276,9 @@ int main() {
 
 	// levelOrderFirst(root);
 
-	levelOrderSecond(root);
+	// levelOrderSecond(root);
+
+	levelOrderNewLine(root);
 
 	return 0;
 }
