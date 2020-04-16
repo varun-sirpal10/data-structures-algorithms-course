@@ -177,6 +177,33 @@ void levelOrderFirst(TreeNode* root){
 
 void levelOrderSecond(TreeNode* root){
 	
+	queue<TreeNode*> q;
+
+	q.push(root);
+
+	while(!q.empty()){
+
+		int len = q.size();
+
+		for(int i=0;i<len;i++){
+
+			TreeNode* temp;
+
+			temp = q.front();
+			cout<<temp->val<<" ";
+			q.pop();
+
+			if(temp->left != NULL){
+				q.push(temp->left);
+			}
+
+			if(temp->right != NULL){
+				q.push(temp->right);
+			}
+		}
+
+		cout<<endl;
+	}
 }
 
 int main() {
@@ -206,7 +233,9 @@ int main() {
 	// cout<<result<<endl;
 	// preOrder(root);
 
-	levelOrderFirst(root);
+	// levelOrderFirst(root);
+
+	levelOrderSecond(root);
 
 	return 0;
 }

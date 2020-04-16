@@ -27,7 +27,7 @@ public:
             leftRes = helper(root1->left, root2->right);
             rightRes = helper(root1->right, root2->left);      
             return leftRes and rightRes;
-        }    
+        }
         
         return false;
     }
