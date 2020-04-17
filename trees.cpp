@@ -329,6 +329,45 @@ void boundaryTraversalofTree(TreeNode* root){
 	}
 }
 
+void printNodesAtDistanceKFromRoot(TreeNode* root, int K){
+	int count = 0;
+
+	queue<TreeNode*> q;
+
+	q.push(root);
+
+	vector<int> result;
+
+	while(!q.empty() and count <= K){
+
+		int len = q.size();
+
+		for(int i=0;i<len;i++){
+
+			TreeNode* temp = q.front();
+			q.pop();
+
+			if(count == K){
+				result.push_back(temp->val);
+			}
+
+			if(temp->left != NULL){
+				q.push(temp->left);
+			}
+
+			if(temp->right != NULL){
+				q.push(temp->right);
+			}
+		}
+		count++;
+	}
+
+	for(int i=0;i<result.size();i++){
+		cout<<result[i]<<" ";
+	}
+	cout<<endl;
+}
+
 int main() {
 
 	TreeNode* root = NULL;
@@ -362,7 +401,9 @@ int main() {
 
 	// levelOrderNewLine(root);
 
-	boundaryTraversalofTree(root);
+	// boundaryTraversalofTree(root);
+
+	printNodesAtDistanceKFromRoot(root,3);
 
 	return 0;
 }
