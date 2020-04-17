@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <algorithm>
 
 using namespace std;
 
@@ -288,6 +289,46 @@ vector<int> rightSideView(TreeNode* root) {
     return rightViewOfTree(root,result);
 }
 
+void boundaryTraversalofTree(TreeNode* root){
+
+	queue<TreeNode*> q;
+
+	q.push(root);
+
+	while(!q.empty()){
+		int len = q.size();
+
+		for(int i=0;i<len;i++){
+
+			TreeNode* temp = q.front();
+			q.pop();
+
+			if(i==0){
+				cout<<temp->val<<" ";
+			}
+
+			else if(temp->left == NULL and temp->right==NULL and i != len-1){
+				cout<<temp->val<<" ";
+			}
+
+			if(temp->left != NULL){
+				q.push(temp->left);
+			}
+
+			if(temp->right != NULL){
+				q.push(temp->right);
+			}
+		}
+	}
+
+	vector<int> res = rightSideView(root);
+	reverse(res.begin(),res.end());
+
+	for(int i=0;i<res.size();i++){
+		cout<<res[i]<<" ";
+	}
+}
+
 int main() {
 
 	TreeNode* root = NULL;
@@ -319,7 +360,9 @@ int main() {
 
 	// levelOrderSecond(root);
 
-	levelOrderNewLine(root);
+	// levelOrderNewLine(root);
+
+	boundaryTraversalofTree(root);
 
 	return 0;
 }
