@@ -73,16 +73,42 @@ bool searchBST(TreeNode* root, int key){
 		return searchBST(root->left,key);
 	}
 }
+    
+TreeNode* helper(vector<int>& nums,int start,int end){
+    
+    if(start > end){
+        return NULL;
+    }
+    
+    int mid = (start + end)/2;
+    TreeNode* root = new TreeNode(nums[mid]);
+    root->left = helper(nums,start,mid-1);
+    root->right = helper(nums,mid+1,end);
+    
+    return root;
+}
+
+TreeNode* sortedArrayToBST(vector<int>& nums) {
+    return helper(nums,0,nums.size()-1);
+}
 
 int main(){
-	TreeNode* root = insert();
+	// TreeNode* root = insert();
 
 	// inOrder(root);
 	// cout<<endl;
 
-	cout<<searchBST(root,5)<<endl;
-	cout<<searchBST(root,21)<<endl;
+	// cout<<searchBST(root,5)<<endl;
+	// cout<<searchBST(root,21)<<endl;
 
+	vector<int> nums = {1,2,3,4,5,6,7};
+	int n = nums.size();
+	vector<int> left (nums.begin() + n/2 + 1,nums.end());
+
+	for(int i=0;i<left.size();i++){
+		cout<<left[i]<<" ";
+	}
+	cout<<endl;
 
 
 }
