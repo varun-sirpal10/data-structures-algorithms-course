@@ -403,7 +403,7 @@ int main() {
 
 	// boundaryTraversalofTree(root);
 
-	printNodesAtDistanceKFromRoot(root,3);
+	printNodesAtDistanceKFromRoot(root,2);
 
 	return 0;
 }
