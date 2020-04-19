@@ -303,7 +303,7 @@ void boundaryTraversalofTree(TreeNode* root){
 			TreeNode* temp = q.front();
 			q.pop();
 
-			if(i==0){
+			if(i==0 and (temp->left!=NULL and temp->right!=NULL)){
 				cout<<temp->val<<" ";
 			}
 
@@ -368,6 +368,77 @@ void printNodesAtDistanceKFromRoot(TreeNode* root, int K){
 	cout<<endl;
 }
 
+TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        
+        if(root == NULL){
+            return NULL;
+        }
+        
+        if(root==p or root==q){
+            return root;
+        }
+        
+        TreeNode* leftLCA = lowestCommonAncestor(root->left,p,q);
+        TreeNode* rightLCA = lowestCommonAncestor(root->right,p,q);
+        
+        if(leftLCA!=NULL and rightLCA!=NULL){
+            return root;
+        }
+        
+        if(leftLCA==NULL and rightLCA==NULL){
+            return NULL;
+        }
+        
+        return leftLCA!=NULL ? leftLCA : rightLCA;
+}
+
+void leftBoundary(TreeNode* root){
+	if(root == NULL){
+		return;
+	}
+
+	if(root->left == NULL and root->right == NULL){
+		return;
+	}
+
+	cout<<root->val<<" ";
+
+	if(root->left != NULL){
+		leftBoundary(root->left);
+	}
+	else{
+		leftBoundary(root->right);
+	}
+}
+
+void rightBoundary(TreeNode* root){
+	if(root == NULL){
+		return;
+	}
+
+	if(root->left == NULL and root->right == NULL){
+		return;
+	}
+
+	if(root->right != NULL){
+		rightBoundary(root->right);
+	}
+	else{
+		rightBoundary(root->left);
+	}
+
+	cout<<root->val<<" ";
+}
+
+void printLeafNode(TreeNode* root){
+	if(!root->left and !root->right){
+		cout<<root->val<<" ";
+	}
+
+	printLeafNode(root->left);
+	printLeafNode(root->right);
+}
+
 int main() {
 
 	TreeNode* root = NULL;
@@ -401,9 +472,9 @@ int main() {
 
 	// levelOrderNewLine(root);
 
-	// boundaryTraversalofTree(root);
+	boundaryTraversalofTree(root);
 
-	printNodesAtDistanceKFromRoot(root,2);
+	// printNodesAtDistanceKFromRoot(root,2);
 
 	return 0;
 }
