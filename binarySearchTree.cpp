@@ -214,14 +214,31 @@ bool hasPathSum(TreeNode* root, int sum) {
     return leftRes or rightRes;
 }
 
+void inOrderTraversal(TreeNode* root, int &val){
+    if(root == NULL){
+        return;
+    }
+    
+    inOrderTraversal(root->right,val);
+    root->val += val;
+    val = root->val;
+    inOrderTraversal(root->left,val);
+}
+
+TreeNode* bstToGst(TreeNode* root) {
+    int val=0;
+    inOrderTraversal(root,val);
+    return root;
+}
+
 int main(){
-	// TreeNode* root = insert();
+	TreeNode* root = insert();
 
 	// inOrder(root);
 	// cout<<endl;
 
-	TreeNode* root = NULL;
-	root = builtTree(root);
+	// TreeNode* root = NULL;
+	// root = builtTree(root);
 
 	// cout<<searchBST(root,5)<<endl;
 	// cout<<searchBST(root,21)<<endl;
