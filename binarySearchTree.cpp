@@ -170,6 +170,50 @@ TreeDetail largestBstInBinaryTree(TreeNode* root){
 	return obj;
 }
 
+int preIndex = 0;
+
+TreeNode* buildTreeFromPreorderInorder(int pre[], int in[], int start, int end){
+
+	if(start > end){
+		return NULL;
+	}
+
+	TreeNode* root = new TreeNode(pre[preIndex]);
+
+	int mid = -1;
+
+	for(int i=start;i<=end;i++){
+		if(in[i] == pre[preIndex]){
+			mid = i;
+			break;
+		}
+	}
+
+	preIndex++;
+
+	root->left = buildTreeFromPreorderInorder(pre,in,start,mid-1);
+	root->right = buildTreeFromPreorderInorder(pre,in,mid+1,end);
+
+	return root;
+}
+
+bool hasPathSum(TreeNode* root, int sum) {
+    if(root == NULL){
+        return false;    
+    }
+    
+    if(root->left==NULL and root->right==NULL and root->val == sum){
+        return true;
+    }
+    
+    int myVal = root->val;
+    
+    bool leftRes = hasPathSum(root->left, sum - myVal);
+    bool rightRes = hasPathSum(root->right, sum - myVal);
+    
+    return leftRes or rightRes;
+}
+
 int main(){
 	// TreeNode* root = insert();
 
