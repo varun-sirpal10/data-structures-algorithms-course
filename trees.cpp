@@ -439,6 +439,17 @@ void printLeafNode(TreeNode* root){
 	printLeafNode(root->right);
 }
 
+void printPreOrderWithNullValues(TreeNode* root){
+	if(root == NULL){
+		cout<<"NULL ";
+		return;
+	}
+
+	cout<<root->val<<" ";
+	printPreOrderWithNullValues(root->left);
+	printPreOrderWithNullValues(root->right);
+}
+
 int main() {
 
 	TreeNode* root = NULL;
@@ -472,9 +483,11 @@ int main() {
 
 	// levelOrderNewLine(root);
 
-	boundaryTraversalofTree(root);
+	// boundaryTraversalofTree(root);
 
 	// printNodesAtDistanceKFromRoot(root,2);
+
+	printPreOrderWithNullValues(root);
 
 	return 0;
 }
