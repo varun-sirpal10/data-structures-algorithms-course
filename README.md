@@ -12,5 +12,6 @@ Topics covered till now:
 - Deque
 - Binary Trees
 - Binary Search Trees
+- Heaps
 
 More content added regularly.
