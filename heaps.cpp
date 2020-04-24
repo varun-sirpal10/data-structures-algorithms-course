@@ -57,6 +57,13 @@ void display(vector<int> &heap){
 	cout<<endl;
 }
 
+void buildHeapOptimized(vector<int> &heap){
+	for (int i = heap.size() - 1; i >= 0; i--)
+	{
+		downHeapify(heap,i);
+	}
+}
+
 int main(){
 	vector<int> heap;
 	int n;
@@ -65,10 +72,18 @@ int main(){
 	{
 		int x;
 		cin>>x;
-		insert(heap,x);
+		heap.push_back(x);	
+		// insert(heap,x);
 	}
+	// display(heap);
+	// deletePeakElement(heap);
+	// display(heap);
+
+	buildHeapOptimized(heap);
 	display(heap);
-	deletePeakElement(heap);
-	display(heap);
+
 	return 0;
 }
+
+//11 
+//100 40 435 2 9 20 10 20 35 38 45
