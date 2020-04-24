@@ -79,8 +79,8 @@ int main(){
 	// deletePeakElement(heap);
 	// display(heap);
 
-	buildHeapOptimized(heap);
-	display(heap);
+	// buildHeapOptimized(heap);
+	// display(heap);
 
 	return 0;
 }
