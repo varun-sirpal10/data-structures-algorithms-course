@@ -11,5 +11,6 @@ Topics covered till now:
 - Queues
 - Deque
 - Binary Trees
+- Binary Search Trees
 
 More content added regularly.
