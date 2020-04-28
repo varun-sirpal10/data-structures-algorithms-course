@@ -86,7 +86,7 @@ int main(){
 	// display(v);
 
 	heapSort(v);
-	display(v);	
+	display(v);
 
 	return 0;
 }
