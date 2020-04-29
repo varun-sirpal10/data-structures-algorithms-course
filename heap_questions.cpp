@@ -19,42 +19,102 @@ int connectSticks(vector<int> &sticks){
 
 	priority_queue<int, vector<int>, greater<int> > pq;
 
-	for(int val:sticks){
-		pq.push(val);
+	int sum=0;
+
+	for(int stick:sticks){
+		pq.push(stick);
 	}
 
-	int sum = 0;
+	while(pq.size()>1){
 
-	while(pq.size() > 1){
 		int first = pq.top();
 		pq.pop();
 
 		int second = pq.top();
 		pq.pop();
 
-		sum += first + second;
-		pq.push(first + second);
+		sum+=first+second;
+		pq.push(first+second);
 	}
 
 	return sum;
 }
 
 int findKthLargest(vector<int>& nums, int k) {
+
+	priority_queue<int,vector<int>, greater<int> > pq;
+
+	for(int i=0;i<k;i++){
+		pq.push(nums[i]);
+	}
+
+	for(int i=k;i<nums.size();i++){
+		if(nums[i] > pq.top()){
+			pq.pop();
+			pq.push(nums[i]);
+		}
+	}
+
+	return pq.top();
+}
+
+class Compare{
+public:
+    bool operator()(vector<int> &a, vector<int> &b){
+        int x = a[0]*a[0] + a[1]*a[1];
+        int y = b[0]*b[0] + b[1]*b[1];
         
-    priority_queue<int, vector<int>, greater<int> > pq;
+        return x < y;
+    }
+};  
+    
+vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
+    
+    priority_queue<vector<int>, vector<vector<int>>, Compare> pq;
+    
+    vector<vector<int>> res;
+    
+    for(vector<int> point:points){
+        pq.push(point);
+    }
+    
+    while(pq.size() > K){
+        pq.pop();
+    }
+    
+    while(!pq.empty()){
+        res.push_back(pq.top());
+        pq.pop();
+    }
+    
+    return res;
+}
+
+vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        
+    priority_queue<pair<int,int>> pq;
+    
+    vector<int> res;
     
     for(int i=0;i<k;i++){
-        pq.push(nums[i]);
+        pq.push({nums[i],i});
     }
     
     for(int i=k;i<nums.size();i++){
-        if(nums[i] > pq.top()){
+        pair<int,int> temp = pq.top();
+        
+        res.push_back(temp.first);
+        
+        while(!pq.empty() and pq.top().second <= i - k){
             pq.pop();
-            pq.push(nums[i]);
         }
+        
+        pq.push({nums[i],i});
     }
     
-    return pq.top();
+    res.push_back(pq.top().first);
+    
+    return res;
 }
 
 
