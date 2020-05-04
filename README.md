@@ -13,5 +13,6 @@ Topics covered till now:
 - Binary Trees
 - Binary Search Trees
 - Heaps
+- HashMap
 
 More content added regularly.
