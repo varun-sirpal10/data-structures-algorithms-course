@@ -14,5 +14,6 @@ Topics covered till now:
 - Binary Search Trees
 - Heaps
 - HashMap
+- Dynamic Programming
 
 More content added regularly.
