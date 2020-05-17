@@ -347,6 +347,77 @@ int lengthOfLIS(vector<int>& nums) {
     return maxValue;
 }
 
+int longestCommonSubsequencePureDP(string s1, string s2) {
+    int row = s1.length() + 1;
+    int col = s2.length() + 1;
+    
+    vector<vector<int>> dp(row,vector<int> (col,0));
+    
+    for(int i=0;i<row;i++){
+        dp[i][s2.length()] = 0;
+    }
+    
+    for(int j=0;j<col;j++){
+        dp[s1.length()][j] = 0;
+    }
+    
+    int result;
+    
+    for(int i=s1.length()-1;i>=0;i--){
+        for(int j=s2.length()-1;j>=0;j--){
+            
+            if(s1[i] == s2[j]){
+                result = 1 + dp[i+1][j+1];
+            }
+            
+            else{
+                int first = dp[i+1][j];
+                int second = dp[i][j+1];
+                
+                result = max(first,second);
+            }
+            
+            dp[i][j] = result;
+        }
+    }
+    
+    return dp[0][0];
+}
+
+int numDistinctSubsequencesPureDP(string s, string t) {
+    int row = s.length() + 1;
+    int col = t.length() + 1;
+    
+    vector<vector<long>> dp(row, vector<long> (col,0));
+    
+    for(int j=0;j<col;j++){
+        dp[s.length()][j] = 0;
+    }
+    
+    for(int i=0;i<row;i++){
+        dp[i][t.length()] = 1;
+    }
+    
+    for(int si=s.length()-1;si>=0;si--){
+        for(int ti=t.length()-1;ti>=0;ti--){
+            
+            int count = 0;
+            
+            if(s[si] == t[ti]){
+                count += dp[si+1][ti+1];
+            }
+            
+            count += dp[si+1][ti];
+            
+            dp[si][ti] = count;
+        }
+    }
+    
+    return dp[0][0];
+}
+
+
+
 int main(){
 
 	// int n = 5;
