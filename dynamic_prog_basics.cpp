@@ -416,7 +416,90 @@ int numDistinctSubsequencesPureDP(string s, string t) {
     return dp[0][0];
 }
 
+int longestPalindromeSubseqPureDP(string s) {
+    if(s.length() == 0){
+        return 0;
+    }
+    
+    int row = s.length();
+    int col = s.length();
+    
+    vector<vector<long>> dp(row, vector<long> (col,0));
+    
+    for(int i=0;i<row;i++){
+        dp[i][i] = 1;
+    }
+    
+    for(int right=1;right<=row-1;right++){
+        
+        for(int left=right-1;left>=0;left--){
+            
+            int result;
+            
+            if(s[left] == s[right]){
+                result = dp[left+1][right-1] + 2;
+            }
+            else{
+                int first = dp[left+1][right];
+                int second = dp[left][right-1];
+                
+                result = max(first,second);
+            }
+            
+            dp[left][right] = result;
 
+            for (int x = 0; x < s.length(); x++) {
+
+				for (int y = 0; y < s.length(); y++) {
+					cout << dp[x][y] << "\t";
+				}
+				cout << endl;
+			}
+			cout << "************************************" << endl;
+        }
+	}
+    
+    return dp[0][s.length()-1];
+}
+
+int helper(string &s, int left, int right, vector<vector<int> > &dp) {
+	//BASE CASE
+	if (left == right) {
+		return 1;
+	}
+
+	if (left > right) {
+		return 0;
+	}
+
+	if (dp[left][right] != -1) {
+		return dp[left][right];
+	}
+
+	// RECURSIVE
+	int result;
+
+	if (s[left] == s[right]) {
+		result = helper(s, left + 1, right - 1, dp) + 2;
+	} else {
+		int first = helper(s, left + 1, right, dp);
+		int second = helper(s, left, right - 1, dp);
+
+		result = max(first, second);
+	}
+
+	dp[left][right] = result;
+
+	return result;
+}
+
+int longestPalindromeSubseq(string s) {
+	int n = s.length();
+
+	vector<vector<int> > dp(n, vector<int> (n, -1));
+
+	return helper(s, 0, n - 1, dp);
+}
 
 int main(){
 
@@ -444,6 +527,8 @@ int main(){
 
 	// cout<<countBoardPathPureDP(0,10)<<endl;
 
+
+	cout<<longestPalindromeSubseqPureDP("bbbab")<<endl;
 
 
 	return 0;
