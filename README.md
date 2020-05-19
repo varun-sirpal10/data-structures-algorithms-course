@@ -16,4 +16,3 @@ Topics covered till now:
 - HashMap
 - Dynamic Programming
 
-More content added regularly.
