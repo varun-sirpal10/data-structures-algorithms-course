@@ -12,21 +12,22 @@ public:
     int diameterOfBinaryTree(TreeNode* root) {
         
         int d = 0;
-        height(root,d);
+        heightModified(root,d);
         
         return d;
     }
     
-    int height(TreeNode* root, int &d) {
+    int heightModified(TreeNode* root, int &d) {
 
         if(root == NULL){
             return -1;
         }
-        int leftHeight = height(root->left,d);
-        int rightHeight = height(root->right,d);
+        
+        int leftHeight = heightModified(root->left,d);
+        int rightHeight = heightModified(root->right,d);
         
         d = max(d,leftHeight + rightHeight + 2);
 
         return max(leftHeight,rightHeight) + 1;
-    }	
+    }
 };
