@@ -3,9 +3,7 @@ class MinStack {
     stack<int> s2;
 public:
     /** initialize your data structure here. */
-    MinStack() {
-        
-    }
+    MinStack() {}
     
     void push(int x) {    
         s1.push(x);
